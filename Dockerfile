@@ -1,5 +1,5 @@
 # this is multi stage 
-RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+#RUN echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 FROM openjdk:11 as base 
 WORKDIR /app
 COPY . . 
