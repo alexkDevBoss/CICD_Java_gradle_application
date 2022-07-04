@@ -5,7 +5,6 @@ pipeline{
             agent{
                 docker {
                     image 'openjdk:11'
-                    args '-u root:sudo'
                 }
             }
             steps{
