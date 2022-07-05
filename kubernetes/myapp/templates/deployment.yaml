@@ -2,17 +2,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "myapp.fullname" . }}
-  labels:
-    - include "myapp.labels" . | nindent 4
+  labels: {{ include "myapp.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      - include "myapp.selectorLabels" . | nindent 6
+      {{ include "myapp.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        - include "myapp.selectorLabels" . | nindent 8
+        {{ include "myapp.selectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
         - name: registry-secret
