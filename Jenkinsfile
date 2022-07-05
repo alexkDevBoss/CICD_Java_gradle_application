@@ -30,7 +30,7 @@ pipeline{
                withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_password')]) {
                     sh '''
                     sudo docker build -t 3.93.184.113:8083/springapp:${VERSION} .
-                    sudo docker login -u admin -p lex@luthor13 3.93.184.113:8083
+                    sudo docker login -u admin -p $docker_password 3.93.184.113:8083
                     sudo docker push  3.93.184.113:8083/springapp:${VERSION}
                     sudo docker rmi 3.93.184.113:8083/springapp:${VERSION}  
                     sudo docker image prune -f      
