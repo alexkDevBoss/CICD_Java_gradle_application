@@ -1,12 +1,10 @@
 pipeline{
     agent any
+    environment{
+        VERSION = "${env.BUILD_ID}"
+    }
     stages{
         stage("sonar quality check"){
-            // agent{
-            //     docker {
-            //         image 'openjdk:11'
-            //     }
-            // }
             steps{
                script{
                 withSonarQubeEnv(credentialsId: 'sonar-token') {
@@ -25,6 +23,22 @@ pipeline{
                }
             }
         }
+        stage("building docker image and pushing it to nexus"){
+           steps{
+               script{
+
+               withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_password')]) {
+                    sh '''
+                    docker build -t 3.93.184.113:8083/springapp:${VERSION} .
+                    docker login -u admin -p $docker_password 3.93.184.113:8083
+                    docker push  3.93.184.113:8083/springapp:${VERSION}
+                    docker rmi 3.93.184.113:8083/springapp:${VERSION}  
+                    docker image prune -f      
+                    '''
+                  }
+                }
+              }
+           }
     }
     post{
         always{
