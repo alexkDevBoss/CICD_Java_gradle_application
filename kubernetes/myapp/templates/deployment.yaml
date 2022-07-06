@@ -15,7 +15,7 @@ spec:
         {{- include "myapp.selectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
-        - name: registry-check
+        - name: registry-secret2
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
@@ -30,20 +30,20 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 120
-            periodSeconds: 10
-            successThreshold: 2
-            failureThreshold: 6
-            timeoutSeconds: 20
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 120
-            periodSeconds: 10
-            successThreshold: 2
-            failureThreshold: 6
-            timeoutSeconds: 20
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+            timeoutSeconds: 10
           resources:
             requests:
               memory: 0.25Gi
