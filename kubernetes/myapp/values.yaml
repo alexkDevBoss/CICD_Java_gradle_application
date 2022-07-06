@@ -11,6 +11,11 @@ image:
   tag: 97
   imagePullSecrets:
   - name: registry-secret
+imageCredentials:
+  name: docker-hosted_credentials
+  registry: 3.93.184.113:8083
+  username: admin
+  password: lex@luthor13
 
 service:
   type: NodePort
