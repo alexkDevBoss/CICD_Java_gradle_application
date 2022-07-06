@@ -18,7 +18,7 @@ spec:
         - name: registry-check
       containers:
         - name: {{ .Chart.Name }}
-          image: 3.93.184.113:8083/springapp:82
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           command: ["/bin/sh"]
           args: ["-c","sh /usr/local/tomcat/bin/startup.sh;while true; do echo hello; sleep 10;done"]
           imagePullPolicy: {{ .Values.image.pullPolicy }}
