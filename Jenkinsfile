@@ -71,8 +71,8 @@ pipeline{
                script{
                    withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
                         dir('kubernetes/') {
-                        //  sh 'HANNA1: $KUBECONFIG'
-                        sh 'HANNA2: kubectl get secret registry-secret --output=yaml'
+                        sh 'echo HANNA1: $KUBECONFIG'
+                        sh 'kubectl get secret registry-secret --output=yaml'
                         sh 'helm upgrade --install --set image.repository="3.93.184.113:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
                         // sh 'kubectl get nodes'
                         }
