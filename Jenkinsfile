@@ -72,7 +72,7 @@ pipeline{
                    withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
                         dir('kubernetes/') {
                             
-                        sh 'sudo helm upgrade --install --set image.repository="http://3.93.184.113:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
+                        sh 'sudo helm upgrade --install --set image.repository="3.93.184.113:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
                         // sh 'kubectl get nodes'
                         }
                     }
