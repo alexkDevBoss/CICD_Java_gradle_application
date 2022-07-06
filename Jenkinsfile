@@ -31,7 +31,7 @@ pipeline{
                     sh '''
                     devboss7878/docker-hosted
                     docker build -t devboss7878/docker-hosted:${VERSION} .
-                    docker login -u devboss7878 -p $docker_password
+                    docker login -u devboss7878 -p lex@luthor13
                     docker push  devboss7878/docker-hosted:${VERSION}
                     docker rmi devboss7878/docker-hosted:${VERSION}  
                     docker image prune -f      
