@@ -20,7 +20,8 @@ spec:
           command: ["/bin/sh"]
           args: ["-c","sh /usr/local/tomcat/bin/startup.sh;while true; do echo hello; sleep 10;done"]
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          imagePullSecrets: registry-secret
+          imagePullSecrets:
+            - name: registry-secret
           ports:
             - name: http
               containerPort: 8080
@@ -50,7 +51,5 @@ spec:
             limits:
               memory: 0.25Gi 
               cpu: 0.5
-      imagePullSecrets:
-        - name: registry-secret
                 
 
