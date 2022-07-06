@@ -30,20 +30,20 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 60
-            periodSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
-            timeoutSeconds: 10
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            successThreshold: 2
+            failureThreshold: 6
+            timeoutSeconds: 20
           readinessProbe:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 60
-            periodSeconds: 5
-            successThreshold: 1
-            failureThreshold: 3
-            timeoutSeconds: 10
+            initialDelaySeconds: 120
+            periodSeconds: 10
+            successThreshold: 2
+            failureThreshold: 6
+            timeoutSeconds: 20
           resources:
             requests:
               memory: 0.25Gi
