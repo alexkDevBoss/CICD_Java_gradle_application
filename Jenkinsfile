@@ -29,10 +29,11 @@ pipeline{
 
                withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_password')]) {
                     sh '''
-                    docker build -t 3.93.184.113:8083/springapp:${VERSION} .
-                    docker login -u admin -p $docker_password 3.93.184.113:8083
-                    docker push  3.93.184.113:8083/springapp:${VERSION}
-                    docker rmi 3.93.184.113:8083/springapp:${VERSION}  
+                    devboss7878/docker-hosted
+                    docker build -t devboss7878/docker-hosted:${VERSION} .
+                    docker login -u devboss7878 -p $docker_password
+                    docker push  devboss7878/docker-hosted:${VERSION}
+                    docker rmi devboss7878/docker-hosted:${VERSION}  
                     docker image prune -f      
                     '''
                   }
@@ -66,20 +67,20 @@ pipeline{
                 }
               }
            }
-        stage('Deploying application on k8s cluster') {
-            steps {
-               script{
-                   withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
-                        dir('kubernetes/') {
-                        sh 'echo HANNA1: $KUBECONFIG'
-                        sh 'kubectl get secret registry-secret --output=yaml'
-                        sh 'helm upgrade --install --set image.repository="3.93.184.113:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
-                        // sh 'kubectl get nodes'
-                        }
-                    }
-               }
-            }
-        }
+        // stage('Deploying application on k8s cluster') {
+        //     steps {
+        //        script{
+        //            withCredentials([kubeconfigFile(credentialsId: 'kubernetes-config', variable: 'KUBECONFIG')]) {
+        //                 dir('kubernetes/') {
+        //                 sh 'echo HANNA1: $KUBECONFIG'
+        //                 sh 'kubectl get secret registry-secret --output=yaml'
+        //                 sh 'helm upgrade --install --set image.repository="3.93.184.113:8083/springapp" --set image.tag="${VERSION}" myjavaapp myapp/ ' 
+        //                 // sh 'kubectl get nodes'
+        //                 }
+        //             }
+        //        }
+        //     }
+        // }
     }
     post{
 		always {
