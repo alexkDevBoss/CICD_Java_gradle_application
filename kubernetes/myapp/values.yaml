@@ -5,10 +5,10 @@
 replicaCount: 2
 
 image:
-  repository: IMAGE_NAME
-  pullPolicy: IfNotPresent
+  repository: 3.93.184.113:8083/springapp
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: IMAGE_TAG
+  tag: 97
   imagePullSecrets:
   - name: registry-secret
 
