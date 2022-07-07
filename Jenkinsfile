@@ -23,7 +23,7 @@ pipeline{
                }
             }
         }
-        stage("building docker image and pushing it to nexus"){
+        stage("building docker image and pushing it to DockerHub"){
            steps{
                script{
 
